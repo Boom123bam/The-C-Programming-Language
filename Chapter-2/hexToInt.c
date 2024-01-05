@@ -1,10 +1,15 @@
 #include <stdio.h>
 
+// converts hex input to int and prints it 
+// can be upper or lower case
+
 int hexCharToString(char c);
 
 int main (){
   int result = 0;
-  unsigned int digit = 0;
+  signed short digit = 0;
+
+  printf("enter hex number: ");
 
   for (char input; (scanf("%c", &input) == 1) && input != '\n';){
     digit = hexCharToString(input);
@@ -16,7 +21,7 @@ int main (){
 
     result = result * 16 + digit;
   }
-  printf("%d\n", result);
+  printf("result: %d\n", result);
 
   return 0;
 }
