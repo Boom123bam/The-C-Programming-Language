@@ -51,4 +51,3 @@ int main() {
 
   printf("result: %d\n", pop());
 }
-
