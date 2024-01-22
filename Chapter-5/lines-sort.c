@@ -12,73 +12,73 @@ void getLine(char *p, char *lineTo);
 int isLarger(char *cp1, char *cp2);
 
 int main() {
-  char strInput[] = "farst\narst\nparst\ncarst\nbarst\nah\nzarst\nfar";
-  char currentLine[MAX_LINE];
-  char *linePointers[MAX_LINES];
+    char strInput[] = "farst\narst\nparst\ncarst\nbarst\nah\nzarst\nfar";
+    char currentLine[MAX_LINE];
+    char *linePointers[MAX_LINES];
 
-  getPointerArray(linePointers, strInput);
-  bubbleSort(linePointers);
+    getPointerArray(linePointers, strInput);
+    bubbleSort(linePointers);
 
-  for (int i = 0; linePointers[i]; i++) {
-    getLine(linePointers[i], currentLine);
-    printf("%s\n", currentLine);
-  }
+    for (int i = 0; linePointers[i]; i++) {
+        getLine(linePointers[i], currentLine);
+        printf("%s\n", currentLine);
+    }
 }
 
 void bubbleSort(char **pointerArrStartpointer) {
-  int sorted = 0;
-  char **pointerArrPointer1, **pointerArrPointer2;
+    int sorted = 0;
+    char **pointerArrPointer1, **pointerArrPointer2;
 
-  if (**pointerArrStartpointer == '\0')
-    return;
+    if (**pointerArrStartpointer == '\0')
+        return;
 
-  while (!sorted) {
-    sorted = 1;
-    pointerArrPointer1 = pointerArrStartpointer;
-    pointerArrPointer2 = pointerArrStartpointer + 1;
-    while (*pointerArrPointer2) {
-      if (isLarger(*pointerArrPointer1, *pointerArrPointer2)) {
-        sorted = 0;
-        swapPointers(pointerArrPointer1, pointerArrPointer2);
-      }
-      pointerArrPointer1++;
-      pointerArrPointer2++;
+    while (!sorted) {
+        sorted = 1;
+        pointerArrPointer1 = pointerArrStartpointer;
+        pointerArrPointer2 = pointerArrStartpointer + 1;
+        while (*pointerArrPointer2) {
+            if (isLarger(*pointerArrPointer1, *pointerArrPointer2)) {
+                sorted = 0;
+                swapPointers(pointerArrPointer1, pointerArrPointer2);
+            }
+            pointerArrPointer1++;
+            pointerArrPointer2++;
+        }
     }
-  }
 
-  return;
+    return;
 }
 
 int isLarger(char *cp1, char *cp2) {
-  for (; *cp1 == *cp2; cp1++, cp2++) {
-  }
-  return *cp1 > *cp2;
+    for (; *cp1 == *cp2; cp1++, cp2++) {
+    }
+    return *cp1 > *cp2;
 }
 
 void swapPointers(char **a, char **b) {
-  char *temp = *a;
-  *a = *b;
-  *b = temp;
-  return;
+    char *temp = *a;
+    *a = *b;
+    *b = temp;
+    return;
 }
 
 void getPointerArray(char **pointerArrayPointer, char *linesStringPointer) {
-  if (!*linesStringPointer)
+    if (!*linesStringPointer)
+        return;
+    *pointerArrayPointer++ = linesStringPointer;
+    while (*linesStringPointer) {
+        if (*linesStringPointer == '\n')
+            *pointerArrayPointer++ = ++linesStringPointer;
+        else
+            linesStringPointer++;
+    }
     return;
-  *pointerArrayPointer++ = linesStringPointer;
-  while (*linesStringPointer) {
-    if (*linesStringPointer == '\n')
-      *pointerArrayPointer++ = ++linesStringPointer;
-    else
-      linesStringPointer++;
-  }
-  return;
 }
 
 void getLine(char *p, char *lineTo) {
-  for (; *p && *p != '\n'; p++, lineTo++) {
-    *lineTo = *p;
-  }
-  *lineTo = '\0';
-  return;
+    for (; *p && *p != '\n'; p++, lineTo++) {
+        *lineTo = *p;
+    }
+    *lineTo = '\0';
+    return;
 }

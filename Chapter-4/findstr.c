@@ -15,56 +15,57 @@ int getLine(char to[], int maxLen);
 int getIndex(char src[], char strToFind[], int maxLen);
 
 int main() {
-  char currentLine[MAX_LINE];
-  char lines[MAX_LINE][MAX_LINES];
+    char currentLine[MAX_LINE];
+    char lines[MAX_LINE][MAX_LINES];
 
-  int i, y;
-  i = y = 0;
+    int i, y;
+    i = y = 0;
 
-  while (getLine(currentLine, MAX_LINE) > 0) {
-    if (getIndex(currentLine, STRING_TO_FIND, MAX_LINE) != -1) {
-      strcpy(lines[i++], currentLine);
+    while (getLine(currentLine, MAX_LINE) > 0) {
+        if (getIndex(currentLine, STRING_TO_FIND, MAX_LINE) != -1) {
+            strcpy(lines[i++], currentLine);
+        }
     }
-  }
 
-  while (y < i)
-    printf("%s\n", lines[y++]);
+    while (y < i)
+        printf("%s\n", lines[y++]);
 
-  return 0;
+    return 0;
 }
 
 int getLine(char to[], int maxLen) {
-  char c;
-  int i = 0;
+    char c;
+    int i = 0;
 
-  while ((scanf("%c", &c)) && c != '\n' && i < maxLen) {
-    to[i++] = c;
-  }
-  to[i] = '\0';
+    while ((scanf("%c", &c)) && c != '\n' && i < maxLen) {
+        to[i++] = c;
+    }
+    to[i] = '\0';
 
-  return i;
+    return i;
 }
 
 int getIndex(char src[], char stringToFind[], int maxLen) {
-  int matchIndex = -1;
+    int matchIndex = -1;
 
-  int i;
-  char c;
-  char cMatch;
+    int i;
+    char c;
+    char cMatch;
 
-  for (i = 0; i < maxLen && (c = src[i]) != '\0'; i++) {
-    cMatch = matchIndex == -1 ? stringToFind[0] : stringToFind[i - matchIndex];
-    if (cMatch == '\0')
-      return matchIndex;
+    for (i = 0; i < maxLen && (c = src[i]) != '\0'; i++) {
+        cMatch =
+            matchIndex == -1 ? stringToFind[0] : stringToFind[i - matchIndex];
+        if (cMatch == '\0')
+            return matchIndex;
 
-    if (matchIndex == -1) {
-      if (c == cMatch) {
-        matchIndex = i;
-      }
-    } else if (c != cMatch) {
-      matchIndex = -1;
+        if (matchIndex == -1) {
+            if (c == cMatch) {
+                matchIndex = i;
+            }
+        } else if (c != cMatch) {
+            matchIndex = -1;
+        }
     }
-  }
 
-  return -1;
+    return -1;
 }
